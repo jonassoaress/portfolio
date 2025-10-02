@@ -1,6 +1,7 @@
 {
   "name": "jonassoaress",
   "version": "0.1.0",
+  "description": "Portfólio pessoal desenvolvido com Next.js",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -23,5 +24,15 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "@eslint/eslintrc": "^3"
-  }
+  },
+  "keywords": [
+    "nextjs",
+    "react",
+    "portfolio",
+    "jonassoaress",
+    "typescript",
+    "tailwindcss"
+  ],
+  "author": "Jonas Soares",
+  "license": "MIT"
 }
