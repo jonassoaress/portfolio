@@ -134,7 +134,7 @@ export default function ContactPage() {
                 <div className="flex flex-wrap gap-3">
                   <Button asChild variant="outline" className="gap-2">
                     <a
-                      href="https://github.com/jonassantoss"
+                      href="https://github.com/jonassoaress"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -143,7 +143,7 @@ export default function ContactPage() {
                   </Button>
                   <Button asChild variant="outline" className="gap-2">
                     <a
-                      href="https://linkedin.com/in/jonassant0s"
+                      href="https://linkedin.com/in/jonassoaress"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

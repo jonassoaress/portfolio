@@ -69,7 +69,7 @@ export default function Hero() {
                 aria-label="GitHub"
               >
                 <a
-                  href="https://github.com/jonassantoss"
+                  href="https://github.com/jonassoaress"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -85,7 +85,7 @@ export default function Hero() {
                 aria-label="LinkedIn"
               >
                 <a
-                  href="https://linkedin.com/in/jonassant0s"
+                  href="https://linkedin.com/in/jonassoaress"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
