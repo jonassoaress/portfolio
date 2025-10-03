@@ -7,7 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-[🌐 Ver Portfolio ao Vivo](https://seusite.com) • [📧 Entrar em Contato](mailto:seu@email.com)
+[🌐 Ver Portfolio ao Vivo](https://www.jonassoares-dev.me) • [📧 Entrar em Contato](mailto:seu@email.com)
 
 ---
 
@@ -119,7 +119,7 @@ A Vercel é a plataforma ideal para Next.js — deploy em segundos, CDN global, 
 
 Gostou do projeto? Vamos conversar!
 
-- 🌐 Website: [seusite.com](https://seusite.com) [EM BREVE!]
+- 🌐 Website: [jonassoares-dev.me](https://www.jonassoares-dev.me)
 - 💼 LinkedIn: [/in/jonassoares](https://linkedin.com/in/jonassoares)
 - 📧 Email: jonassoares.live@gmail.com
 
