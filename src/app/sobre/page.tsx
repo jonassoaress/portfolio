@@ -9,14 +9,18 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { skills } from "@/data/skills";
+import { fetchGithubProjects } from "@/lib/github";
 import Link from "next/link";
 
-export default function AboutPage() {
+export default async function AboutPage() {
   const skillsByCategory = {
     frontend: skills.filter((s) => s.category === "frontend"),
     backend: skills.filter((s) => s.category === "backend"),
     tools: skills.filter((s) => s.category === "tools"),
   };
+
+  const projects = await fetchGithubProjects();
+  const projectCount = projects.length;
 
   return (
     <main className="bg-muted/10">
@@ -26,11 +30,11 @@ export default function AboutPage() {
             Sobre mim
           </Badge>
           <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Uma jornada focada em criar experiências digitais memoráveis
+            Construindo minha jornada no desenvolvimento de software
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Conheça meu caminho como desenvolvedor, minha filosofia de trabalho
-            e as habilidades que impulsionam meus projetos.
+            Conheça minha trajetória como desenvolvedor iniciante, meus
+            aprendizados e as tecnologias que estudo e aplico nos meus projetos.
           </p>
         </div>
         <div className="pointer-events-none absolute inset-x-0 top-10 mx-auto h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
@@ -42,26 +46,26 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle className="text-3xl">Minha história</CardTitle>
               <CardDescription>
-                Paixão por tecnologia, colaboração e entrega de valor real.
+                Os primeiros passos na minha carreira como desenvolvedor.
               </CardDescription>
             </CardHeader>
             <CardContent className="prose prose-neutral max-w-none space-y-4 text-muted-foreground">
               <p>
-                Olá! Sou um desenvolvedor Full Stack apaixonado por criar
-                soluções web elegantes e eficientes. Minha jornada na
-                programação começou há alguns anos e, desde então, venho
-                aprimorando minhas habilidades para entregar experiências
-                digitais de alto impacto.
+                Sou estudante do curso de Análise e Desenvolvimento de Sistemas
+                na FATEC Mogi Mirim, no 6.º semestre.
               </p>
               <p>
-                Trabalho diariamente com tecnologias como React, Next.js,
-                Node.js e TypeScript, aliando performance, acessibilidade e
-                design para construir produtos que as pessoas amam usar.
+                Atualmente, estou estagiando no departamento de desenvolvimento
+                de software da Infonacci.
               </p>
               <p>
-                Além do desenvolvimento, valorizo muito a troca de conhecimento
-                e a comunidade open source. Acredito que colaboração e
-                aprendizado constante são pilares para a evolução profissional.
+                Sou apaixonado por tecnologia e programação, e gosto de
+                transformar ideias em soluções práticas por meio da programação.
+              </p>
+              <p>
+                Tenho conhecimentos em várias linguagens de programação,
+                facilidade para trabalhar em equipe, resolver problemas
+                rapidamente e adaptar-me a novos desafios.
               </p>
             </CardContent>
           </Card>
@@ -75,21 +79,22 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-sm text-muted-foreground">
               <div>
-                <p className="text-2xl font-semibold text-foreground">+50</p>
+                <p className="text-2xl font-semibold text-foreground">
+                  {projectCount}
+                </p>
                 <p>
-                  Projetos entregues entre iniciativas pessoais e profissionais.
+                  Projetos no GitHub entre iniciativas pessoais e de estudo.
                 </p>
               </div>
               <div>
-                <p className="text-2xl font-semibold text-foreground">5+</p>
-                <p>
-                  Anos explorando tecnologias web modernas e aplicações cloud.
-                </p>
+                <p className="text-2xl font-semibold text-foreground">2020</p>
+                <p>Ano em que comecei minha jornada na programação.</p>
               </div>
               <div>
-                <p className="text-2xl font-semibold text-foreground">∞</p>
+                <p className="text-2xl font-semibold text-foreground">&lt;1</p>
                 <p>
-                  Curiosidade para aprender, compartilhar e construir em equipe.
+                  Ano de experiência profissional como estagiário em
+                  desenvolvimento.
                 </p>
               </div>
             </CardContent>

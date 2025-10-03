@@ -185,6 +185,14 @@
   --sidebar-ring: var(--ring);
 }
 
+@font-face {
+  font-family: 'BigBlue';
+  src: url('/public/fonts/BigBlueTermPlusNerdFont-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   * {
     border-color: var(--border);
@@ -196,5 +204,13 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  .header-title {
+    font-family: 'BigBlue', var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+  .header-title:hover {
+    color: var(--primary);
   }
 }

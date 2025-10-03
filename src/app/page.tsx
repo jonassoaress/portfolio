@@ -120,12 +120,12 @@ export default async function Home() {
       {/* CTA Section */}
       <section className="relative overflow-hidden py-24">
         <div className="container relative z-10 mx-auto px-6 text-center">
-          <div className="mx-auto max-w-2xl space-y-6 rounded-3xl border border-border/60 bg-gradient-to-r from-primary via-accent to-secondary p-12 text-primary-foreground shadow-xl">
-            <h2 className="text-4xl font-bold tracking-tight">
+          <div className="mx-auto max-w-2xl space-y-6 rounded-3xl border-2 border-primary/20 bg-gradient-to-br from-primary/95 to-accent/95 p-12 shadow-2xl backdrop-blur-sm">
+            <h2 className="text-4xl font-bold tracking-tight text-background">
               Vamos trabalhar juntos?
             </h2>
-            <Separator className="mx-auto w-20 border-primary-foreground/40" />
-            <p className="text-lg text-primary-foreground/80">
+            <Separator className="mx-auto w-20 border-background/30" />
+            <p className="text-lg text-background/90">
               Estou sempre aberto a discutir novos projetos, ideias e
               oportunidades. Vamos construir algo incrível?
             </p>
@@ -133,7 +133,7 @@ export default async function Home() {
               asChild
               size="lg"
               variant="secondary"
-              className="bg-card text-foreground hover:bg-card/90"
+              className="bg-background text-foreground shadow-lg transition-transform hover:scale-105 hover:bg-background/90"
             >
               <Link href="/contato">Entre em Contato</Link>
             </Button>

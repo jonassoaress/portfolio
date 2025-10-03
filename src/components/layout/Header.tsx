@@ -35,10 +35,7 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
       <nav className="container flex h-16 items-center justify-between gap-4 px-6">
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight transition-colors hover:text-primary"
-        >
+        <Link href="/" className="header-title">
           Jonas Soares
         </Link>
 
