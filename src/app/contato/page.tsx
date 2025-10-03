@@ -40,16 +40,32 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus("sending");
 
-    // Aqui você implementaria a lógica de envio do formulário
-    // Por exemplo, usando uma API route do Next.js ou um serviço como Formspree
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Simulando envio
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
+      const data = await response.json();
 
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 1000);
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        console.error("Erro:", data.error);
+
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   const handleChange = (
