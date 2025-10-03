@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { githubProfileUrl } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Github, Menu, X } from "lucide-react";
+import { Github, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
@@ -79,11 +79,7 @@ export default function Header() {
             <SheetContent side="right" className="w-[280px]">
               <SheetHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                 <SheetTitle className="text-left text-lg">Navegação</SheetTitle>
-                <SheetClose asChild>
-                  <Button variant="ghost" size="icon" aria-label="Fechar menu">
-                    <X className="size-5" />
-                  </Button>
-                </SheetClose>
+                <SheetClose aria-label="Fechar menu" />
               </SheetHeader>
               <div className="flex flex-col gap-3 py-4">
                 {navItems.map((item) => (

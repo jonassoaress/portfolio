@@ -1,3 +1,4 @@
+import { FaviconManager } from "@/components/layout/FaviconManager";
 import Header from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={cn("min-h-screen font-sans antialiased", inter.variable)}
       >
         <ThemeProvider>
+          <FaviconManager />
           <div className="relative flex min-h-screen flex-col bg-background text-foreground">
             <Header />
             <main className="flex-1 pt-20">{children}</main>
