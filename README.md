@@ -58,7 +58,7 @@ Cache estratégico de 1 hora balanceia frescor dos dados com velocidade de carre
 
 1️⃣ **Clone e instale:**
 ```bash
-git clone https://github.com/jonassantoss/jonassoaress-portfolio.git
+git clone https://github.com/jonassoaress/jonassoaress-portfolio.git
 cd jonassoaress-portfolio
 npm install
 ```
@@ -69,8 +69,8 @@ Crie um arquivo `.env.local` na raiz:
 
 ```bash
 # Sua conta do GitHub
-GITHUB_USERNAME=jonassantoss
-NEXT_PUBLIC_GITHUB_USERNAME=jonassantoss
+GITHUB_USERNAME=jonassoaress
+NEXT_PUBLIC_GITHUB_USERNAME=jonassoaress
 
 # Token para evitar rate limits (Recomendado!)
 # Gere em: https://github.com/settings/tokens
@@ -107,7 +107,7 @@ src/
 
 ### Deploy na Vercel (Recomendado)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jonassantoss/jonassoaress-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jonassoaress/jonassoaress-portfolio)
 
 1. Clique no botão acima
 2. Configure as variáveis de ambiente

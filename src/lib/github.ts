@@ -17,7 +17,7 @@ interface GitHubRepository {
   };
 }
 
-const DEFAULT_USERNAME = "jonassantoss";
+const DEFAULT_USERNAME = "jonassoaress";
 const FEATURED_TOPICS = new Set(["featured", "destaque", "highlight"]);
 const FRONTEND_KEYWORDS = [
   "frontend",
@@ -39,9 +39,9 @@ const BACKEND_KEYWORDS = [
   "spring",
 ];
 const EXCLUDED_REPOS = new Set([
-  "jonassantoss",
+  "jonassoaress",
   "portfolio",
-  "jonassantoss.github.io",
+  "jonassoaress.github.io",
 ]);
 
 export const headers: HeadersInit = {
