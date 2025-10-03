@@ -1,13 +1,31 @@
 "use client";
 
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { githubProfileUrl } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { Github, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { ThemeToggle } from "./ThemeToggle";
+
+interface NavItem {
+  label: string;
+  href: string;
+}
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { label: "Home", href: "/" },
     { label: "Projetos", href: "/projetos" },
     { label: "Sobre", href: "/sobre" },
@@ -15,81 +33,93 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-2xl font-bold text-green-900 hover:text-blue-600 transition-colors"
-          >
-            Jonas Soares
-          </Link>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
+      <nav className="container flex h-16 items-center justify-between gap-4 px-6">
+        <Link
+          href="/"
+          className="text-lg font-semibold tracking-tight transition-colors hover:text-primary"
+        >
+          Jonas Soares
+        </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-6 md:flex">
+          <div className="flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "font-medium",
+                  pathname === item.href && "text-primary"
+                )}
               >
                 {item.label}
               </Link>
             ))}
+          </div>
+          <Separator orientation="vertical" className="h-6" />
+          <ThemeToggle />
+          <Button asChild size="sm" className="min-w-[110px]">
             <a
               href={githubProfileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              GitHub
+              <Github className="size-4" /> GitHub
             </a>
-          </div>
-
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-600 hover:text-blue-600"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          </Button>
         </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block py-2 text-gray-600 hover:text-blue-600 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <a
-              href={githubProfileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-center"
-            >
-              GitHub
-            </a>
-          </div>
-        )}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Abrir menu">
+                <Menu className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[280px]">
+              <SheetHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+                <SheetTitle className="text-left text-lg">Navegação</SheetTitle>
+                <SheetClose asChild>
+                  <Button variant="ghost" size="icon" aria-label="Fechar menu">
+                    <X className="size-5" />
+                  </Button>
+                </SheetClose>
+              </SheetHeader>
+              <div className="flex flex-col gap-3 py-4">
+                {navItems.map((item) => (
+                  <SheetClose asChild key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                        pathname === item.href
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground hover:bg-accent/60 hover:text-accent-foreground"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </SheetClose>
+                ))}
+              </div>
+              <Separator className="my-4" />
+              <SheetClose asChild>
+                <Button asChild className="w-full">
+                  <a
+                    href={githubProfileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="size-4" /> GitHub
+                  </a>
+                </Button>
+              </SheetClose>
+            </SheetContent>
+          </Sheet>
+        </div>
       </nav>
     </header>
   );

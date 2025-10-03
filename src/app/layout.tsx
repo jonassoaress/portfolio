@@ -1,9 +1,15 @@
 import Header from "@/components/layout/Header";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Jonas Soares - Desenvolvedor Full Stack",
@@ -23,18 +29,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={inter.className}>
-        <Header />
-        <div className="pt-20">{children}</div>
-        <footer className="bg-gray-900 text-white py-8">
-          <div className="container mx-auto px-6 text-center">
-            <p className="text-gray-400">
-              © {new Date().getFullYear()} Jonas Soares. Todos os direitos
-              reservados.
-            </p>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body
+        className={cn("min-h-screen font-sans antialiased", inter.variable)}
+      >
+        <ThemeProvider>
+          <div className="relative flex min-h-screen flex-col bg-background text-foreground">
+            <Header />
+            <main className="flex-1 pt-20">{children}</main>
+            <footer className="bg-primary text-primary-foreground py-8">
+              <div className="container mx-auto px-6 text-center">
+                <p className="text-primary-foreground/80">
+                  © {new Date().getFullYear()} Jonas Soares. Todos os direitos
+                  reservados.
+                </p>
+              </div>
+            </footer>
           </div>
-        </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

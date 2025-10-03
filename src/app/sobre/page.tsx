@@ -1,4 +1,15 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { skills } from "@/data/skills";
+import Link from "next/link";
 
 export default function AboutPage() {
   const skillsByCategory = {
@@ -8,185 +19,248 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-20">
-        <div className="container mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-4">Sobre Mim</h1>
-          <p className="text-xl text-blue-100 max-w-2xl">
-            Conheça um pouco mais sobre minha jornada como desenvolvedor
+    <main className="bg-muted/10">
+      <section className="relative overflow-hidden py-20">
+        <div className="container relative z-10 mx-auto px-6">
+          <Badge variant="outline" className="rounded-full px-4 py-1 text-sm">
+            Sobre mim
+          </Badge>
+          <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Uma jornada focada em criar experiências digitais memoráveis
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+            Conheça meu caminho como desenvolvedor, minha filosofia de trabalho
+            e as habilidades que impulsionam meus projetos.
           </p>
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 top-10 mx-auto h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+      </section>
+
+      <section className="pb-20">
+        <div className="container mx-auto grid gap-10 px-6 lg:grid-cols-[2fr_1fr]">
+          <Card className="border-border/60 bg-card/80">
+            <CardHeader>
+              <CardTitle className="text-3xl">Minha história</CardTitle>
+              <CardDescription>
+                Paixão por tecnologia, colaboração e entrega de valor real.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="prose prose-neutral max-w-none space-y-4 text-muted-foreground">
+              <p>
+                Olá! Sou um desenvolvedor Full Stack apaixonado por criar
+                soluções web elegantes e eficientes. Minha jornada na
+                programação começou há alguns anos e, desde então, venho
+                aprimorando minhas habilidades para entregar experiências
+                digitais de alto impacto.
+              </p>
+              <p>
+                Trabalho diariamente com tecnologias como React, Next.js,
+                Node.js e TypeScript, aliando performance, acessibilidade e
+                design para construir produtos que as pessoas amam usar.
+              </p>
+              <p>
+                Além do desenvolvimento, valorizo muito a troca de conhecimento
+                e a comunidade open source. Acredito que colaboração e
+                aprendizado constante são pilares para a evolução profissional.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/60 bg-card/80">
+            <CardHeader>
+              <CardTitle>Em números</CardTitle>
+              <CardDescription>
+                Indicadores das minhas entregas e experiências recentes.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm text-muted-foreground">
+              <div>
+                <p className="text-2xl font-semibold text-foreground">+50</p>
+                <p>
+                  Projetos entregues entre iniciativas pessoais e profissionais.
+                </p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold text-foreground">5+</p>
+                <p>
+                  Anos explorando tecnologias web modernas e aplicações cloud.
+                </p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold text-foreground">∞</p>
+                <p>
+                  Curiosidade para aprender, compartilhar e construir em equipe.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            {/* Bio */}
-            <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Minha História
-              </h2>
-              <div className="prose prose-lg text-gray-600 space-y-4">
-                <p>
-                  Olá! Sou um desenvolvedor Full Stack apaixonado por criar
-                  soluções web elegantes e eficientes. Minha jornada na
-                  programação começou há X anos, e desde então tenho me dedicado
-                  a aprender e aplicar as melhores práticas de desenvolvimento.
-                </p>
-                <p>
-                  Atualmente, trabalho com tecnologias modernas como React,
-                  Next.js, Node.js e TypeScript, sempre buscando entregar
-                  produtos de alta qualidade que proporcionem a melhor
-                  experiência possível para os usuários.
-                </p>
-                <p>
-                  Além de desenvolver, adoro compartilhar conhecimento e
-                  contribuir com a comunidade open source. Acredito que a
-                  colaboração e o aprendizado contínuo são essenciais para o
-                  crescimento profissional.
-                </p>
-              </div>
-            </div>
+      <section className="bg-background py-20">
+        <div className="container mx-auto space-y-10 px-6">
+          <div className="flex flex-col gap-4 text-center">
+            <Badge
+              variant="outline"
+              className="mx-auto rounded-full px-4 py-1 text-sm"
+            >
+              Habilidades técnicas
+            </Badge>
+            <h2 className="text-4xl font-bold tracking-tight text-foreground">
+              Soluções ponta a ponta
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Do design de interfaces ao deploy, construo experiências completas
+              com foco em resultados.
+            </p>
+          </div>
 
-            {/* Skills Detailed */}
-            <div className="space-y-8">
-              <h2 className="text-3xl font-bold text-gray-900">
-                Habilidades Técnicas
-              </h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="border-border/60 bg-card/80">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl">
+                  <span className="text-primary">⚡</span> Frontend
+                </CardTitle>
+                <CardDescription>
+                  Interfaces ricas, responsivas e acessíveis para diferentes
+                  dispositivos.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {skillsByCategory.frontend.map((skill) => (
+                  <Badge
+                    key={skill.name}
+                    variant="secondary"
+                    className="rounded-full px-3 py-1 text-sm"
+                  >
+                    {skill.name}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
 
-              {/* Frontend */}
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-3xl">⚡</span>
-                  Frontend Development
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Especializado em criar interfaces modernas, responsivas e
-                  acessíveis
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {skillsByCategory.frontend.map((skill) => (
-                    <div key={skill.name} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                      <span className="text-gray-700">{skill.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <Card className="border-border/60 bg-card/80">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl">
+                  <span className="text-secondary">�</span> Backend
+                </CardTitle>
+                <CardDescription>
+                  APIs escaláveis, arquitetura modular e foco em
+                  observabilidade.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {skillsByCategory.backend.map((skill) => (
+                  <Badge
+                    key={skill.name}
+                    variant="secondary"
+                    className="rounded-full px-3 py-1 text-sm"
+                  >
+                    {skill.name}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
 
-              {/* Backend */}
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-3xl">🔧</span>
-                  Backend Development
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Construindo APIs robustas, escaláveis e seguras
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {skillsByCategory.backend.map((skill) => (
-                    <div key={skill.name} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                      <span className="text-gray-700">{skill.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Tools */}
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-3xl">🛠️</span>
-                  Ferramentas & DevOps
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Experiência com ferramentas modernas de desenvolvimento e
-                  deploy
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {skillsByCategory.tools.map((skill) => (
-                    <div key={skill.name} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                      <span className="text-gray-700">{skill.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Interests */}
-            <div className="bg-white rounded-xl shadow-lg p-8 mt-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Interesses
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">📚</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      Aprendizado Contínuo
-                    </h4>
-                    <p className="text-gray-600">
-                      Sempre explorando novas tecnologias e melhores práticas
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">🌐</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      Open Source
-                    </h4>
-                    <p className="text-gray-600">
-                      Contribuindo com a comunidade de desenvolvedores
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">🎨</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      UI/UX Design
-                    </h4>
-                    <p className="text-gray-600">
-                      Criando interfaces intuitivas e agradáveis
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">⚡</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      Performance
-                    </h4>
-                    <p className="text-gray-600">
-                      Otimizando aplicações para máxima eficiência
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Card className="border-border/60 bg-card/80">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl">
+                  <span className="text-accent">🛠️</span> Ferramentas & DevOps
+                </CardTitle>
+                <CardDescription>
+                  Automação, monitoramento e entrega contínua para acelerar
+                  ciclos de produto.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {skillsByCategory.tools.map((skill) => (
+                  <Badge
+                    key={skill.name}
+                    variant="secondary"
+                    className="rounded-full px-3 py-1 text-sm"
+                  >
+                    {skill.name}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Gostou do que viu?
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Vamos conversar sobre como posso ajudar no seu próximo projeto
-          </p>
-          <a
-            href="/contato"
-            className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-          >
-            Entre em Contato
-          </a>
+      <section className="pb-24">
+        <div className="container mx-auto grid gap-6 px-6 md:grid-cols-2">
+          <Card className="border-border/60 bg-card/80">
+            <CardHeader>
+              <CardTitle>Interesses</CardTitle>
+              <CardDescription>
+                O que me inspira a continuar evoluindo diariamente.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              {[
+                {
+                  icon: "📚",
+                  title: "Aprendizado contínuo",
+                  description:
+                    "Sempre explorando novas tecnologias e boas práticas.",
+                },
+                {
+                  icon: "🌐",
+                  title: "Open source",
+                  description:
+                    "Compartilhando conhecimento e colaborando com a comunidade.",
+                },
+                {
+                  icon: "🎨",
+                  title: "UI/UX",
+                  description:
+                    "Criando interfaces intuitivas com foco na experiência.",
+                },
+                {
+                  icon: "⚡",
+                  title: "Performance",
+                  description:
+                    "Otimizando aplicações para serem rápidas e escaláveis.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="flex items-start gap-3 rounded-lg border border-border/60 p-4"
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      {item.title}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/60 bg-card/80">
+            <CardHeader>
+              <CardTitle>Próximos passos</CardTitle>
+              <CardDescription>
+                Sempre buscando colaborar em projetos desafiadores.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm text-muted-foreground">
+              <p>
+                Curto o processo de transformar ideias em produtos reais. Se
+                você tem um desafio e acredita que minha experiência pode
+                ajudar, vamos conversar.
+              </p>
+              <Separator />
+              <Button asChild>
+                <Link href="/contato">Entre em contato</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
     </main>

@@ -1,4 +1,15 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Project } from "@/types";
+import { CalendarRange, ExternalLink, Github, Star } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
@@ -21,121 +32,84 @@ const formatDate = (value?: string) => {
   return dateFormatter.format(date);
 };
 
+const typeVariant: Record<Project["type"], string> = {
+  frontend: "bg-primary/15 text-primary",
+  backend: "bg-secondary/20 text-secondary-foreground",
+  fullstack: "bg-accent/15 text-accent-foreground",
+};
+
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const typeColors = {
-    frontend: "bg-blue-100 text-blue-800",
-    backend: "bg-green-100 text-green-800",
-    fullstack: "bg-purple-100 text-purple-800",
-  };
   const formattedDate = formatDate(project.updatedAt);
   const hasStars = typeof project.stars === "number" && project.stars >= 0;
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-      {/* Image */}
-      <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600">
-        {/* Placeholder - substituir por <Image /> do Next */}
-        <div className="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold opacity-20">
+    <Card className="group overflow-hidden border-border/60 bg-card/80 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl">
+      <div className="relative h-44 w-full overflow-hidden bg-gradient-to-br from-primary/30 via-secondary/30 to-accent/30">
+        <div className="absolute inset-0 flex items-center justify-center text-6xl font-black text-primary/20">
           {project.title.charAt(0)}
         </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,transparent,rgba(0,0,0,0.35))] opacity-40" />
       </div>
 
-      {/* Content */}
-      <div className="p-6">
-        {/* Type Badge */}
-        <span
-          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
-            typeColors[project.type]
-          }`}
-        >
+      <CardHeader className="space-y-3">
+        <Badge className={cn("w-fit px-3", typeVariant[project.type])}>
           {project.type.toUpperCase()}
-        </span>
-
-        {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-2">
+        </Badge>
+        <CardTitle className="text-2xl font-semibold text-foreground">
           {project.title}
-        </h3>
+        </CardTitle>
+        <p className="text-sm text-muted-foreground line-clamp-3">
+          {project.description}
+        </p>
+      </CardHeader>
 
-        {/* Description */}
-        <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
-            >
+      <CardContent className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {project.tags.slice(0, 4).map((tag) => (
+            <Badge key={tag} variant="outline" className="rounded-full">
               {tag}
-            </span>
+            </Badge>
           ))}
-          {project.tags.length > 3 && (
-            <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
-              +{project.tags.length - 3}
-            </span>
+          {project.tags.length > 4 && (
+            <Badge variant="secondary" className="rounded-full">
+              +{project.tags.length - 4}
+            </Badge>
           )}
         </div>
 
         {(formattedDate || hasStars) && (
-          <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
-            {formattedDate ? (
-              <span className="flex items-center gap-1">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8 7V3m8 4V3m-9 8h10m-11 8h12a2 2 0 002-2V7a2 2 0 00-2-2h-1M7 5H6a2 2 0 00-2 2v12a2 2 0 002 2h1"
-                  />
-                </svg>
-                {formattedDate}
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+            {formattedDate && (
+              <span className="inline-flex items-center gap-1">
+                <CalendarRange className="size-4" />
+                Atualizado em {formattedDate}
               </span>
-            ) : (
-              <span />
             )}
 
             {hasStars && (
-              <span className="flex items-center gap-1">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
+              <span className="inline-flex items-center gap-1">
+                <Star className="size-4 fill-yellow-400 text-yellow-500" />
                 {project.stars}
               </span>
             )}
           </div>
         )}
+      </CardContent>
 
-        {/* Links */}
-        <div className="flex gap-3">
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-center text-sm font-medium text-gray-700"
-          >
-            GitHub
+      <CardFooter className="flex flex-col gap-2 sm:flex-row">
+        <Button asChild variant="outline" className="flex-1">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+            <Github className="mr-2 size-4" /> GitHub
           </a>
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-center text-sm font-medium"
-            >
-              Ver Demo
+        </Button>
+        {project.liveUrl && (
+          <Button asChild className="flex-1">
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="mr-2 size-4" /> Ver Demo
             </a>
-          )}
-        </div>
-      </div>
-    </div>
+          </Button>
+        )}
+      </CardFooter>
+    </Card>
   );
 }
