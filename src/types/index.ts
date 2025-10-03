@@ -9,6 +9,8 @@ export interface Project {
   liveUrl?: string;
   type: "frontend" | "backend" | "fullstack";
   featured?: boolean;
+  stars?: number;
+  updatedAt?: string;
 }
 
 export interface Skill {

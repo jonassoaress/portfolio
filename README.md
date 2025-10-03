@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🌐 Portfolio do Jonas Soares
 
-## Getting Started
+Aplicação de portfólio construída com Next.js (App Router) e Tailwind CSS. O conteúdo de projetos é carregado dinamicamente da API do GitHub, garantindo que o site esteja sempre atualizado com os repositórios mais recentes.
 
-First, run the development server:
+## 🚀 Stack
+
+- [Next.js 15](https://nextjs.org/) com App Router
+- [React 19](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- ESLint + configurações do Next.js
+
+## 🧰 Pré-requisitos
+
+- Node.js 18.18 ou superior
+- npm (ou pnpm/bun/yarn, caso prefira)
+
+## ⚙️ Variáveis de ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto com as variáveis abaixo:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Obrigatório: define qual conta do GitHub será consultada
+GITHUB_USERNAME=jonassantoss
+
+# Opcional: expõe o mesmo usuário no cliente (componentes client-side)
+NEXT_PUBLIC_GITHUB_USERNAME=jonassantoss
+
+# Opcional: recomendado para evitar limites de rate da API
+# Gere um token em https://github.com/settings/tokens (escopo "public_repo" é suficiente)
+GITHUB_TOKEN=ghp_xxxxxxxxxxxxx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Se nenhuma variável for definida, o projeto usa `jonassantoss` como usuário padrão e faz requisições não autenticadas (sujeitas a rate limit reduzido).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ▶️ Como rodar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Instale as dependências e suba o servidor de desenvolvimento:
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Depois disso, acesse [http://localhost:3000](http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧪 Scripts úteis
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `npm run dev`: inicia o servidor de desenvolvimento
+- `npm run build`: gera o build de produção
+- `npm run start`: serve o build de produção
+- `npm run lint`: roda as checagens do ESLint
 
-## Deploy on Vercel
+## 📦 Estrutura principal
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `src/app`: rotas do App Router e estilos globais
+- `src/components`: componentes reutilizáveis (layout, seções e UI)
+- `src/data`: adaptadores de dados (GitHub, skills, etc.)
+- `src/lib`: utilitários compartilhados, incluindo a integração com o GitHub
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📡 Integração com o GitHub
+
+- Os projetos são carregados via `src/lib/github.ts` utilizando `fetch`
+- É aplicado cache por 1 hora (`revalidate`) para equilibrar desempenho e frescor
+- Repositórios marcados com o tópico `featured` (ou `destaque`) ganham destaque na home
+- Campos como estrelas, tags e data de atualização são derivados das informações do repositório
+
+## 🚀 Deploy
+
+Faça o deploy rapidamente na [Vercel](https://vercel.com/) ou na plataforma de sua preferência. Lembre-se de configurar as variáveis de ambiente no painel da hospedagem.

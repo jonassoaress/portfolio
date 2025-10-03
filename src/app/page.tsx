@@ -4,10 +4,12 @@ import { getFeaturedProjects } from "@/data/projects";
 import { getSkillsByCategory } from "@/data/skills";
 import Link from "next/link";
 
-export default function Home() {
-  const featuredProjects = getFeaturedProjects();
-  const frontendSkills = getSkillsByCategory("frontend");
-  const backendSkills = getSkillsByCategory("backend");
+export default async function Home() {
+  const [featuredProjects, frontendSkills, backendSkills] = await Promise.all([
+    getFeaturedProjects(),
+    Promise.resolve(getSkillsByCategory("frontend")),
+    Promise.resolve(getSkillsByCategory("backend")),
+  ]);
 
   return (
     <main>
