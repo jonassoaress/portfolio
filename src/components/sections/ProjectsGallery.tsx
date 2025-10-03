@@ -50,13 +50,15 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
 
   return (
     <section className="space-y-12 py-12">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <Card className="border-border/60 bg-card/80 backdrop-blur">
-          <CardContent className="flex flex-col gap-4 p-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-semibold">Filtrar por categoria</h2>
-                <p className="text-sm text-muted-foreground">
+          <CardContent className="flex flex-col gap-6 p-4 sm:p-6">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="space-y-1">
+                <h2 className="text-lg font-semibold sm:text-xl">
+                  Filtrar por categoria
+                </h2>
+                <p className="text-xs text-muted-foreground sm:text-sm">
                   Explore os projetos por área de atuação.
                 </p>
               </div>
@@ -66,19 +68,21 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
                 onValueChange={(value) =>
                   value && setActiveFilter(value as FilterValue)
                 }
-                className="flex flex-wrap gap-2"
+                className="flex flex-wrap gap-2 sm:gap-3"
                 variant="outline"
               >
                 {filters.map((filter) => (
                   <ToggleGroupItem
                     key={filter.value}
                     value={filter.value}
-                    className="flex items-center gap-2 px-4 py-2"
+                    className="flex items-center gap-1.5 px-3 py-2 sm:gap-2 sm:px-4"
                   >
-                    <span className="text-sm font-medium">{filter.label}</span>
+                    <span className="text-xs font-medium sm:text-sm">
+                      {filter.label}
+                    </span>
                     <Badge
                       variant="secondary"
-                      className="rounded-full px-2 text-xs"
+                      className="rounded-full px-1.5 text-[10px] sm:px-2 sm:text-xs"
                     >
                       {filter.count}
                     </Badge>
