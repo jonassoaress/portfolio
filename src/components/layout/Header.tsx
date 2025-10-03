@@ -35,8 +35,8 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
       <nav className="container flex h-16 items-center justify-between gap-4 px-6">
-        <Link href="/" className="header-title">
-          Jonas Soares
+        <Link href="/" className="header-title inline-block">
+          <div className="typewriter">Jonas Soares</div>
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
