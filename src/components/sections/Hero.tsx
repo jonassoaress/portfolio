@@ -1,11 +1,17 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+"use client";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { githubUsername } from "@/config/site";
+import { getGithubAvatarUrl } from "@/lib/github";
 import { Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero() {
+  const avatarUrl = getGithubAvatarUrl(githubUsername, { size: 256 });
+
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-accent/20 py-16">
       <div className="container relative z-10 mx-auto px-6">
@@ -19,6 +25,10 @@ export default function Hero() {
             </Badge>
 
             <Avatar className="size-28 border-4 border-primary/30 shadow-lg">
+              <AvatarImage
+                src={avatarUrl}
+                alt={`Avatar do GitHub de ${githubUsername}`}
+              />
               <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-3xl font-bold text-primary-foreground">
                 JS
               </AvatarFallback>

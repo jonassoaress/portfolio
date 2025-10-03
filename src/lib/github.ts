@@ -44,7 +44,7 @@ const EXCLUDED_REPOS = new Set([
   "jonassantoss.github.io",
 ]);
 
-const headers: HeadersInit = {
+export const headers: HeadersInit = {
   Accept: "application/vnd.github+json",
 };
 
@@ -117,6 +117,22 @@ const mapRepositoryToProject = (repo: GitHubRepository): Project => {
 };
 
 const username = process.env.GITHUB_USERNAME || DEFAULT_USERNAME;
+
+interface AvatarOptions {
+  size?: number;
+}
+
+export const getGithubAvatarUrl = (
+  user: string = username,
+  { size = 200 }: AvatarOptions = {}
+) => {
+  const normalizedUsername = user?.trim() || DEFAULT_USERNAME;
+  const normalizedSize = Math.min(Math.max(size, 40), 400);
+
+  return `https://avatars.githubusercontent.com/${encodeURIComponent(
+    normalizedUsername
+  )}?size=${normalizedSize}`;
+};
 
 export const fetchGithubProjects = cache(async (): Promise<Project[]> => {
   const response = await fetch(
