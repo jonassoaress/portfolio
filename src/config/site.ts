@@ -1,4 +1,4 @@
-const DEFAULT_GITHUB_USERNAME = "jonassantoss";
+const DEFAULT_GITHUB_USERNAME = "jonassoaress";
 
 export const githubUsername =
   process.env.NEXT_PUBLIC_GITHUB_USERNAME ||
