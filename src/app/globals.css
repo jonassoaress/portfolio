@@ -219,12 +219,29 @@
     border-right: .15em solid var(--foreground);
     width: 0;
     white-space: nowrap;
-    animation: typing 2s steps(30 ,end) forwards, blink-caret .8s step-end infinite;
+    /* Cycle every 14s: 2s type, 10s hold, 2s delete, then immediately restart */
+    animation: typewriter-cycle 14s infinite, blink-caret .8s step-end infinite;
   }
 
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+  /* 14s cycle: 0-14.285% type with steps (~2s), 14.285-85.714% hold (~10s),
+     85.714-100% delete with steps (~2s), then restart */
+  @keyframes typewriter-cycle {
+    0% {
+      width: 0;
+      /* stepped typing between 0% and 8.333% */
+      animation-timing-function: steps(30, end);
+    }
+    14.285% {
+      width: 100%;
+    }
+    85.714% {
+      width: 100%;
+      /* stepped deleting between 50% and 58.333% */
+      animation-timing-function: steps(30, end);
+    }
+    100% {
+      width: 0;
+    }
   }
   @keyframes blink-caret {
     from, to { border-color: transparent }
