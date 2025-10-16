@@ -4,11 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { githubUsername } from "@/config/site";
 import { getGithubAvatarUrl } from "@/lib/github";
+import { Dictionary } from "@/lib/i18n";
 import { Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 
-export default function Hero() {
+type HeroDictionary = Dictionary["hero"];
+
+interface HeroProps {
+  dictionary: HeroDictionary;
+}
+
+export default function Hero({ dictionary }: HeroProps) {
   const avatarUrl = getGithubAvatarUrl(githubUsername, { size: 256 });
+  const avatarAlt = dictionary.avatarAlt.replace("{username}", githubUsername);
 
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-accent/20 py-16">
@@ -19,14 +27,11 @@ export default function Hero() {
               variant="outline"
               className="rounded-full px-4 py-1 text-sm font-medium"
             >
-              Desenvolvedor Full Stack
+              {dictionary.badge}
             </Badge>
 
             <Avatar className="size-28 border-4 border-primary/30 shadow-lg">
-              <AvatarImage
-                src={avatarUrl}
-                alt={`Avatar do GitHub de ${githubUsername}`}
-              />
+              <AvatarImage src={avatarUrl} alt={avatarAlt} />
               <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-3xl font-bold text-primary-foreground">
                 JS
               </AvatarFallback>
@@ -34,21 +39,19 @@ export default function Hero() {
 
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-                Olá, eu sou
+                {dictionary.greeting}
                 <span className="block bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-                  Jonas Soares dos Santos
+                  {dictionary.name}
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground sm:text-xl">
-                Construindo experiências web modernas e escaláveis com React,
-                Next.js e Node.js. Apaixonado por código limpo e soluções
-                criativas.
+                {dictionary.description}
               </p>
             </div>
 
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <Button asChild size="lg" className="min-w-[160px]">
-                <Link href="/projetos">Ver Projetos</Link>
+                <Link href="/projetos">{dictionary.primaryCta}</Link>
               </Button>
               <Button
                 asChild
@@ -56,7 +59,7 @@ export default function Hero() {
                 size="lg"
                 className="min-w-[160px]"
               >
-                <Link href="/contato">Entre em Contato</Link>
+                <Link href="/contato">{dictionary.secondaryCta}</Link>
               </Button>
             </div>
 
@@ -66,7 +69,7 @@ export default function Hero() {
                 size="icon"
                 variant="ghost"
                 className="size-10 rounded-full"
-                aria-label="GitHub"
+                aria-label={dictionary.githubAria}
               >
                 <a
                   href="https://github.com/jonassoaress"
@@ -74,7 +77,7 @@ export default function Hero() {
                   rel="noopener noreferrer"
                 >
                   <Github className="size-5" />
-                  <span className="sr-only">GitHub</span>
+                  <span className="sr-only">{dictionary.githubAria}</span>
                 </a>
               </Button>
               <Button
@@ -82,7 +85,7 @@ export default function Hero() {
                 size="icon"
                 variant="ghost"
                 className="size-10 rounded-full"
-                aria-label="LinkedIn"
+                aria-label={dictionary.linkedinAria}
               >
                 <a
                   href="https://linkedin.com/in/jonassoaress"
@@ -90,7 +93,7 @@ export default function Hero() {
                   rel="noopener noreferrer"
                 >
                   <Linkedin className="size-5" />
-                  <span className="sr-only">LinkedIn</span>
+                  <span className="sr-only">{dictionary.linkedinAria}</span>
                 </a>
               </Button>
             </div>

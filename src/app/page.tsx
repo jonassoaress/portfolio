@@ -6,32 +6,35 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getFeaturedProjects } from "@/data/projects";
 import { getSkillsByCategory } from "@/data/skills";
+import { getDictionaryForCurrentRequest } from "@/lib/i18n";
 import Link from "next/link";
 
 export default async function Home() {
-  const [featuredProjects, frontendSkills, backendSkills] = await Promise.all([
-    getFeaturedProjects(),
-    Promise.resolve(getSkillsByCategory("frontend")),
-    Promise.resolve(getSkillsByCategory("backend")),
-  ]);
+  const [featuredProjects, frontendSkills, backendSkills, dictionary] =
+    await Promise.all([
+      getFeaturedProjects(),
+      Promise.resolve(getSkillsByCategory("frontend")),
+      Promise.resolve(getSkillsByCategory("backend")),
+      getDictionaryForCurrentRequest(),
+    ]);
+  const homeDictionary = dictionary.home;
 
   return (
     <main>
-      <Hero />
+      <Hero dictionary={dictionary.hero} />
 
       {/* Featured Projects Section */}
       <section className="py-20">
         <div className="container mx-auto space-y-12 px-6">
           <div className="text-center">
             <Badge variant="outline" className="rounded-full px-4 py-1 text-sm">
-              Projetos em Destaque
+              {homeDictionary.featured.badge}
             </Badge>
             <h2 className="mt-6 text-4xl font-bold tracking-tight text-foreground">
-              Alguns dos meus trabalhos mais recentes
+              {homeDictionary.featured.title}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Seleção de projetos que demonstram minha experiência em frontend,
-              backend e soluções full stack.
+              {homeDictionary.featured.description}
             </p>
           </div>
 
@@ -43,7 +46,7 @@ export default async function Home() {
 
           <div className="text-center">
             <Button asChild size="lg">
-              <Link href="/projetos">Ver Todos os Projetos</Link>
+              <Link href="/projetos">{homeDictionary.featured.viewAll}</Link>
             </Button>
           </div>
         </div>
@@ -54,14 +57,13 @@ export default async function Home() {
         <div className="container mx-auto space-y-10 px-6">
           <div className="text-center">
             <Badge variant="outline" className="rounded-full px-4 py-1 text-sm">
-              Habilidades & Tecnologias
+              {homeDictionary.skills.badge}
             </Badge>
             <h2 className="mt-6 text-4xl font-bold tracking-tight text-foreground">
-              Ferramentas que impulsionam meus projetos
+              {homeDictionary.skills.title}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Um panorama das stacks que domino para entregar soluções
-              completas.
+              {homeDictionary.skills.description}
             </p>
           </div>
 
@@ -72,7 +74,7 @@ export default async function Home() {
                   <span className="text-primary">⚡</span> Frontend
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  Interfaces modernas, responsivas e acessíveis.
+                  {homeDictionary.skills.frontendDescription}
                 </p>
               </CardHeader>
               <CardContent>
@@ -96,7 +98,7 @@ export default async function Home() {
                   <span className="text-secondary">🔧</span> Backend
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  APIs robustas, escaláveis e seguras.
+                  {homeDictionary.skills.backendDescription}
                 </p>
               </CardHeader>
               <CardContent>
@@ -122,12 +124,11 @@ export default async function Home() {
         <div className="container relative z-10 mx-auto px-6 text-center">
           <div className="mx-auto max-w-2xl space-y-6 rounded-3xl border-2 border-primary/20 bg-gradient-to-br from-primary/95 to-accent/95 p-12 shadow-2xl backdrop-blur-sm">
             <h2 className="text-4xl font-bold tracking-tight text-background">
-              Vamos trabalhar juntos?
+              {homeDictionary.cta.title}
             </h2>
             <Separator className="mx-auto w-20 border-background/30" />
             <p className="text-lg text-background/90">
-              Estou sempre aberto a discutir novos projetos, ideias e
-              oportunidades. Vamos construir algo incrível?
+              {homeDictionary.cta.description}
             </p>
             <Button
               asChild
@@ -135,7 +136,7 @@ export default async function Home() {
               variant="secondary"
               className="bg-background text-foreground shadow-lg transition-transform hover:scale-105 hover:bg-background/90"
             >
-              <Link href="/contato">Entre em Contato</Link>
+              <Link href="/contato">{homeDictionary.cta.button}</Link>
             </Button>
           </div>
         </div>

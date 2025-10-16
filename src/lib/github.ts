@@ -100,8 +100,7 @@ const mapRepositoryToProject = (repo: GitHubRepository): Project => {
   return {
     id: repo.id.toString(),
     title: formatTitle(repo.name),
-    description:
-      repo.description ?? "Projeto sem descrição fornecida no GitHub.",
+    description: repo.description ?? "",
     longDescription: repo.description ?? undefined,
     image: `https://opengraph.githubassets.com/1/${owner}/${repo.name}`,
     tags,

@@ -45,6 +45,9 @@ Estrelas, forks e última atualização sincronizados automaticamente do GitHub.
 ### 🏷️ Tags Inteligentes
 Tecnologias e frameworks são extraídos e exibidos de forma visual e organizada.
 
+### 🌍 Experiência Multilíngue
+Visitantes brasileiros veem todo o conteúdo em português automaticamente, enquanto quem acessa de outros países navega em inglês — sem precisar trocar manualmente.
+
 ### 🚀 Performance Otimizada
 Cache estratégico de 1 hora balanceia frescor dos dados com velocidade de carregamento.
 

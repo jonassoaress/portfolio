@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "@/components/providers/locale-provider";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import ProjectCard from "@/components/ui/ProjectCard";
@@ -13,15 +14,14 @@ interface ProjectsGalleryProps {
   projects: Project[];
 }
 
-const LABELS: Record<FilterValue, string> = {
-  all: "Todos",
-  frontend: "Frontend",
-  backend: "Backend",
-  fullstack: "Full Stack",
-};
-
 export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
   const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
+  const projectsGalleryDictionary = useTranslations("projectsGallery");
+
+  const filterKeys = useMemo(
+    () => Object.keys(projectsGalleryDictionary.filters) as FilterValue[],
+    [projectsGalleryDictionary.filters]
+  );
 
   const filters = useMemo(() => {
     const counts = projects.reduce((acc, project) => {
@@ -31,12 +31,14 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
 
     const allCount = projects.length;
 
-    return (Object.keys(LABELS) as FilterValue[]).map((value) => ({
+    const dictionaryFilters = projectsGalleryDictionary.filters;
+
+    return filterKeys.map((value) => ({
       value,
-      label: LABELS[value],
+      label: dictionaryFilters[value],
       count: value === "all" ? allCount : counts[value] ?? 0,
     }));
-  }, [projects]);
+  }, [projects, projectsGalleryDictionary.filters, filterKeys]);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "all") {
@@ -56,10 +58,10 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="space-y-1">
                 <h2 className="text-lg font-semibold sm:text-xl">
-                  Filtrar por categoria
+                  {projectsGalleryDictionary.filterTitle}
                 </h2>
                 <p className="text-xs text-muted-foreground sm:text-sm">
-                  Explore os projetos por área de atuação.
+                  {projectsGalleryDictionary.filterDescription}
                 </p>
               </div>
               <ToggleGroup
@@ -105,10 +107,10 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
           <Card className="border-dashed border-border/60">
             <CardContent className="py-16 text-center">
               <h3 className="text-lg font-semibold">
-                Nenhum projeto encontrado
+                {projectsGalleryDictionary.emptyTitle}
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Ajuste os filtros ou volte mais tarde para ver novos projetos.
+                {projectsGalleryDictionary.emptyDescription}
               </p>
             </CardContent>
           </Card>

@@ -10,31 +10,45 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { skills } from "@/data/skills";
 import { fetchGithubProjects } from "@/lib/github";
+import { getDictionaryForCurrentRequest } from "@/lib/i18n";
 import Link from "next/link";
 
 export default async function AboutPage() {
+  const [[frontendSkills, backendSkills, toolSkills], [projects, dictionary]] =
+    await Promise.all([
+      Promise.resolve([
+        skills.filter((s) => s.category === "frontend"),
+        skills.filter((s) => s.category === "backend"),
+        skills.filter((s) => s.category === "tools"),
+      ]),
+      Promise.all([fetchGithubProjects(), getDictionaryForCurrentRequest()]),
+    ]);
+
   const skillsByCategory = {
-    frontend: skills.filter((s) => s.category === "frontend"),
-    backend: skills.filter((s) => s.category === "backend"),
-    tools: skills.filter((s) => s.category === "tools"),
+    frontend: frontendSkills,
+    backend: backendSkills,
+    tools: toolSkills,
   };
 
-  const projects = await fetchGithubProjects();
   const projectCount = projects.length;
+  const aboutDictionary = dictionary.aboutPage;
+  const metricsItems = aboutDictionary.metrics.items.map((item) => ({
+    value: item.value.replace("{projectCount}", projectCount.toString()),
+    description: item.description,
+  }));
 
   return (
     <main className="bg-muted/10">
       <section className="relative overflow-hidden py-20">
         <div className="container relative z-10 mx-auto px-6">
           <Badge variant="outline" className="rounded-full px-4 py-1 text-sm">
-            Sobre mim
+            {aboutDictionary.badge}
           </Badge>
           <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Construindo minha jornada no desenvolvimento de software
+            {aboutDictionary.title}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Conheça minha trajetória como desenvolvedor iniciante, meus
-            aprendizados e as tecnologias que estudo e aplico nos meus projetos.
+            {aboutDictionary.description}
           </p>
         </div>
         <div className="pointer-events-none absolute inset-x-0 top-10 mx-auto h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
@@ -44,59 +58,36 @@ export default async function AboutPage() {
         <div className="container mx-auto grid gap-10 px-6 lg:grid-cols-[2fr_1fr]">
           <Card className="border-border/60 bg-card/80">
             <CardHeader>
-              <CardTitle className="text-3xl">Minha história</CardTitle>
+              <CardTitle className="text-3xl">
+                {aboutDictionary.story.title}
+              </CardTitle>
               <CardDescription>
-                Os primeiros passos na minha carreira como desenvolvedor.
+                {aboutDictionary.story.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="prose prose-neutral max-w-none space-y-4 text-muted-foreground">
-              <p>
-                Sou estudante do curso de Análise e Desenvolvimento de Sistemas
-                na FATEC Mogi Mirim, no 6.º semestre.
-              </p>
-              <p>
-                Atualmente, estou estagiando no departamento de desenvolvimento
-                de software da Infonacci.
-              </p>
-              <p>
-                Sou apaixonado por tecnologia e programação, e gosto de
-                transformar ideias em soluções práticas por meio da programação.
-              </p>
-              <p>
-                Tenho conhecimentos em várias linguagens de programação,
-                facilidade para trabalhar em equipe, resolver problemas
-                rapidamente e adaptar-me a novos desafios.
-              </p>
+              {aboutDictionary.story.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </CardContent>
           </Card>
 
           <Card className="border-border/60 bg-card/80">
             <CardHeader>
-              <CardTitle>Em números</CardTitle>
+              <CardTitle>{aboutDictionary.metrics.title}</CardTitle>
               <CardDescription>
-                Indicadores das minhas entregas e experiências recentes.
+                {aboutDictionary.metrics.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 text-sm text-muted-foreground">
-              <div>
-                <p className="text-2xl font-semibold text-foreground">
-                  {projectCount}
-                </p>
-                <p>
-                  Projetos no GitHub entre iniciativas pessoais e de estudo.
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-semibold text-foreground">2020</p>
-                <p>Ano em que comecei minha jornada na programação.</p>
-              </div>
-              <div>
-                <p className="text-2xl font-semibold text-foreground">&lt;1</p>
-                <p>
-                  Ano de experiência profissional como estagiário em
-                  desenvolvimento.
-                </p>
-              </div>
+              {metricsItems.map((item) => (
+                <div key={item.description}>
+                  <p className="text-2xl font-semibold text-foreground">
+                    {item.value}
+                  </p>
+                  <p>{item.description}</p>
+                </div>
+              ))}
             </CardContent>
           </Card>
         </div>
@@ -109,14 +100,13 @@ export default async function AboutPage() {
               variant="outline"
               className="mx-auto rounded-full px-4 py-1 text-sm"
             >
-              Habilidades técnicas
+              {aboutDictionary.skills.badge}
             </Badge>
             <h2 className="text-4xl font-bold tracking-tight text-foreground">
-              Soluções ponta a ponta
+              {aboutDictionary.skills.title}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Do design de interfaces ao deploy, construo experiências completas
-              com foco em resultados.
+              {aboutDictionary.skills.description}
             </p>
           </div>
 
@@ -124,11 +114,11 @@ export default async function AboutPage() {
             <Card className="border-border/60 bg-card/80">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
-                  <span className="text-primary">⚡</span> Frontend
+                  <span className="text-primary">⚡</span>{" "}
+                  {aboutDictionary.skills.frontendTitle}
                 </CardTitle>
                 <CardDescription>
-                  Interfaces ricas, responsivas e acessíveis para diferentes
-                  dispositivos.
+                  {aboutDictionary.skills.frontendDescription}
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
@@ -147,11 +137,11 @@ export default async function AboutPage() {
             <Card className="border-border/60 bg-card/80">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
-                  <span className="text-secondary">�</span> Backend
+                  <span className="text-secondary">🔧</span>{" "}
+                  {aboutDictionary.skills.backendTitle}
                 </CardTitle>
                 <CardDescription>
-                  APIs escaláveis, arquitetura modular e foco em
-                  observabilidade.
+                  {aboutDictionary.skills.backendDescription}
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
@@ -170,11 +160,11 @@ export default async function AboutPage() {
             <Card className="border-border/60 bg-card/80">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
-                  <span className="text-accent">🛠️</span> Ferramentas & DevOps
+                  <span className="text-accent">🛠️</span>{" "}
+                  {aboutDictionary.skills.toolsTitle}
                 </CardTitle>
                 <CardDescription>
-                  Automação, monitoramento e entrega contínua para acelerar
-                  ciclos de produto.
+                  {aboutDictionary.skills.toolsDescription}
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
@@ -197,38 +187,13 @@ export default async function AboutPage() {
         <div className="container mx-auto grid gap-6 px-6 md:grid-cols-2">
           <Card className="border-border/60 bg-card/80">
             <CardHeader>
-              <CardTitle>Interesses</CardTitle>
+              <CardTitle>{aboutDictionary.interests.title}</CardTitle>
               <CardDescription>
-                O que me inspira a continuar evoluindo diariamente.
+                {aboutDictionary.interests.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
-              {[
-                {
-                  icon: "📚",
-                  title: "Aprendizado contínuo",
-                  description:
-                    "Sempre explorando novas tecnologias e boas práticas.",
-                },
-                {
-                  icon: "🌐",
-                  title: "Open source",
-                  description:
-                    "Compartilhando conhecimento e colaborando com a comunidade.",
-                },
-                {
-                  icon: "🎨",
-                  title: "UI/UX",
-                  description:
-                    "Criando interfaces intuitivas com foco na experiência.",
-                },
-                {
-                  icon: "⚡",
-                  title: "Performance",
-                  description:
-                    "Otimizando aplicações para serem rápidas e escaláveis.",
-                },
-              ].map((item) => (
+              {aboutDictionary.interests.items.map((item) => (
                 <div
                   key={item.title}
                   className="flex items-start gap-3 rounded-lg border border-border/60 p-4"
@@ -249,20 +214,16 @@ export default async function AboutPage() {
 
           <Card className="border-border/60 bg-card/80">
             <CardHeader>
-              <CardTitle>Próximos passos</CardTitle>
+              <CardTitle>{aboutDictionary.nextSteps.title}</CardTitle>
               <CardDescription>
-                Sempre buscando colaborar em projetos desafiadores.
+                {aboutDictionary.nextSteps.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 text-sm text-muted-foreground">
-              <p>
-                Curto o processo de transformar ideias em produtos reais. Se
-                você tem um desafio e acredita que minha experiência pode
-                ajudar, vamos conversar.
-              </p>
+              <p>{aboutDictionary.nextSteps.body}</p>
               <Separator />
               <Button asChild>
-                <Link href="/contato">Entre em contato</Link>
+                <Link href="/contato">{aboutDictionary.nextSteps.button}</Link>
               </Button>
             </CardContent>
           </Card>

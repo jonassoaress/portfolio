@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "@/components/providers/locale-provider";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -24,12 +25,13 @@ interface NavItem {
 
 export default function Header() {
   const pathname = usePathname();
+  const headerDictionary = useTranslations("header");
 
   const navItems: NavItem[] = [
-    { label: "Home", href: "/" },
-    { label: "Projetos", href: "/projetos" },
-    { label: "Sobre", href: "/sobre" },
-    { label: "Contato", href: "/contato" },
+    { label: headerDictionary.nav.home, href: "/" },
+    { label: headerDictionary.nav.projects, href: "/projetos" },
+    { label: headerDictionary.nav.about, href: "/sobre" },
+    { label: headerDictionary.nav.contact, href: "/contato" },
   ];
 
   return (
@@ -63,7 +65,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="size-4" /> GitHub
+              <Github className="size-4" /> {headerDictionary.actions.github}
             </a>
           </Button>
         </div>
@@ -72,14 +74,20 @@ export default function Header() {
           <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Abrir menu">
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={headerDictionary.menu.open}
+              >
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px]">
               <SheetHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                <SheetTitle className="text-left text-lg">Navegação</SheetTitle>
-                <SheetClose aria-label="Fechar menu" />
+                <SheetTitle className="text-left text-lg">
+                  {headerDictionary.menu.title}
+                </SheetTitle>
+                <SheetClose aria-label={headerDictionary.menu.close} />
               </SheetHeader>
               <div className="flex flex-col gap-3 py-4">
                 {navItems.map((item) => (
@@ -106,7 +114,8 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Github className="size-4" /> GitHub
+                    <Github className="size-4" />{" "}
+                    {headerDictionary.actions.github}
                   </a>
                 </Button>
               </SheetClose>

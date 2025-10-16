@@ -4,11 +4,13 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "@/components/providers/locale-provider";
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { setTheme, theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const themeToggleDictionary = useTranslations("themeToggle");
 
   useEffect(() => setMounted(true), []);
 
@@ -18,7 +20,7 @@ export function ThemeToggle() {
         variant="ghost"
         size="icon"
         className="text-muted-foreground"
-        aria-label="Alternar tema"
+        aria-label={themeToggleDictionary.label}
         disabled
       >
         <Sun className="size-4" />
@@ -36,12 +38,12 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       className="text-muted-foreground"
-      aria-label="Alternar tema"
+      aria-label={themeToggleDictionary.label}
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Alternar tema</span>
+      <span className="sr-only">{themeToggleDictionary.label}</span>
     </Button>
   );
 }
