@@ -4,6 +4,8 @@ import { LocaleProvider } from "@/components/providers/locale-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { detectLocale, getDictionary } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -22,6 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
     title: dictionary.site.title,
     description: dictionary.site.description,
     authors: [{ name: "Jonas Soares" }],
+    icons: {
+      icon: [
+        { url: "/favicon_light.ico", media: "(prefers-color-scheme: light)" },
+        { url: "/favicon_dark.ico", media: "(prefers-color-scheme: dark)" },
+      ],
+      shortcut: "/favicon_light.ico",
+    },
     openGraph: {
       title: dictionary.site.title,
       description: dictionary.site.description,
@@ -59,6 +68,8 @@ export default async function RootLayout({
             </div>
           </ThemeProvider>
         </LocaleProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
