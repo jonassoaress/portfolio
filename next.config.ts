@@ -3,7 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Otimizações de imagem
   images: {
-    domains: ["github.com", "raw.githubusercontent.com"],
+    remotePatterns: [
+      { protocol: "https", hostname: "github.com", pathname: "**" },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "**",
+      },
+    ],
     formats: ["image/avif", "image/webp"],
   },
 
