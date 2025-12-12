@@ -95,17 +95,15 @@ const dictionaries = {
     aboutPage: {
       badge: "Sobre mim",
       title: "Construindo minha jornada no desenvolvimento de software",
-      description:
-        "Conheça minha trajetória como desenvolvedor iniciante, meus aprendizados e as tecnologias que estudo e aplico nos meus projetos.",
+      description: "Desenvolvedor Full Stack | Foco em Mobile & Soluções B2B",
       story: {
         title: "Minha história",
         description:
           "Os primeiros passos na minha carreira como desenvolvedor.",
         paragraphs: [
-          "Sou estudante do curso de Análise e Desenvolvimento de Sistemas na FATEC Mogi Mirim, no 6.º semestre.",
-          "Atualmente, estou estagiando no departamento de desenvolvimento de software da Infonacci.",
-          "Sou apaixonado por tecnologia e programação, e gosto de transformar ideias em soluções práticas por meio da programação.",
-          "Tenho conhecimentos em várias linguagens de programação, facilidade para trabalhar em equipe, resolver problemas rapidamente e adaptar-me a novos desafios.",
+          'Minha jornada profissional é definida pela construção de software que resolve problemas reais. Como desenvolvedor Full Stack, atuo no ciclo completo de desenvolvimento de produtos para o setor industrial, onde fui responsável por tirar do papel aplicativos móveis ("chão de fábrica") e dashboards estratégicos de alta complexidade.',
+          "Minha abordagem une a robustez da engenharia de software (Java/Spring Boot) com a agilidade das interfaces modernas (React Native/Node.js). Não escrevo apenas código; crio soluções escaláveis, documentadas e focadas na melhor experiência para o usuário final.",
+          "🎓 Graduado em Análise e Desenvolvimento de Sistemas (FATEC Mogi Mirim).",
         ],
       },
       metrics: {
@@ -113,18 +111,24 @@ const dictionaries = {
         description: "Indicadores das minhas entregas e experiências recentes.",
         items: [
           {
+            value: "2",
+            description:
+              "Soluções em produção. Produtos B2B ativos utilizados por clientes reais.",
+          },
+          {
+            value: "1+",
+            description:
+              "Ano de experiência Full Stack. Experiência prática com Mobile, Backend e Bancos De Dados",
+          },
+          {
             value: "{projectCount}",
             description:
               "Projetos no GitHub entre iniciativas pessoais e de estudo.",
           },
           {
-            value: "2020",
-            description: "Ano em que comecei minha jornada na programação.",
-          },
-          {
-            value: "<1",
+            value: "100%",
             description:
-              "Ano de experiência profissional como estagiário em desenvolvimento.",
+              "Foco no usuário, compromisso com interfaces intuitivas e código limpo.",
           },
         ],
       },
@@ -308,17 +312,15 @@ const dictionaries = {
     },
     aboutPage: {
       badge: "About me",
-      title: "Building my journey in software development",
-      description:
-        "Get to know my path as an early-career developer, what I'm learning, and the technologies I study and apply in my projects.",
+      title: "Full Stack Developer | Mobile & B2B Solutions Focus",
+      description: "Building My Journey in Software Development.",
       story: {
         title: "My story",
         description: "The first steps in my journey as a developer.",
         paragraphs: [
-          "I'm a student in the Systems Analysis and Development program at FATEC Mogi Mirim, currently in the 6th semester.",
-          "I'm currently interning in the software development department at Infonacci.",
-          "I'm passionate about technology and programming, and I love turning ideas into practical solutions through code.",
-          "I have experience with several programming languages, enjoy teamwork, solve problems quickly, and adapt to new challenges.",
+          'My professional journey is defined by building software that solves real-world problems. As a Full Stack Developer, I handle the complete development lifecycle of products for the industrial sector, where I have been responsible for delivering mobile applications ("factory floor" solutions) and complex strategic dashboards from concept to production.',
+          "My approach combines the robustness of traditional software engineering (Java/Spring Boot) with the agility of modern interfaces (React Native/Node.js). I don't just write code; I create scalable, well-documented solutions focused on the end-user experience.",
+          "🎓 B.Sc. in Systems Analysis and Development (FATEC Mogi Mirim).",
         ],
       },
       metrics: {
@@ -326,18 +328,24 @@ const dictionaries = {
         description: "Highlights from my recent work and experience.",
         items: [
           {
+            value: "2",
+            description:
+              "Solutions in Production. Active B2B products used by real client.",
+          },
+          {
+            value: "1+",
+            description:
+              "Year of Full Stack Experience. Practical experience with Mobile, Backend and Databases.",
+          },
+          {
             value: "{projectCount}",
             description:
               "Projects on GitHub including personal initiatives and study cases.",
           },
           {
-            value: "2020",
-            description: "The year I started my programming journey.",
-          },
-          {
-            value: "<1",
+            value: "100%",
             description:
-              "Year of professional experience as a software development intern.",
+              "User Focused. Commitment to intuitive interfaces and clean code.",
           },
         ],
       },
