@@ -1,4 +1,3 @@
-import { FaviconManager } from "@/components/layout/FaviconManager";
 import Header from "@/components/layout/Header";
 import { LocaleProvider } from "@/components/providers/locale-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -26,10 +25,40 @@ export async function generateMetadata(): Promise<Metadata> {
     authors: [{ name: "Jonas Soares" }],
     icons: {
       icon: [
-        { url: "/favicon_light.ico", media: "(prefers-color-scheme: light)" },
-        { url: "/favicon_dark.ico", media: "(prefers-color-scheme: dark)" },
+        {
+          url: "/favicon_light.png",
+          media: "(prefers-color-scheme: light)",
+          type: "image/png",
+        },
+        {
+          url: "/favicon_dark.png",
+          media: "(prefers-color-scheme: dark)",
+          type: "image/png",
+        },
+        {
+          url: "/favicon_light.ico",
+          media: "(prefers-color-scheme: light)",
+          type: "image/x-icon",
+        },
+        {
+          url: "/favicon_dark.ico",
+          media: "(prefers-color-scheme: dark)",
+          type: "image/x-icon",
+        },
       ],
       shortcut: "/favicon_light.ico",
+      apple: [
+        {
+          url: "/favicon_light.png",
+          media: "(prefers-color-scheme: light)",
+          type: "image/png",
+        },
+        {
+          url: "/favicon_dark.png",
+          media: "(prefers-color-scheme: dark)",
+          type: "image/png",
+        },
+      ],
     },
     openGraph: {
       title: dictionary.site.title,
@@ -56,7 +85,6 @@ export default async function RootLayout({
       >
         <LocaleProvider locale={locale} dictionary={dictionary}>
           <ThemeProvider>
-            <FaviconManager />
             <div className="relative flex min-h-screen flex-col bg-background text-foreground">
               <Header />
               <main className="flex-1 pt-20">{children}</main>
