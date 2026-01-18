@@ -12,6 +12,7 @@ interface GitHubRepository {
   stargazers_count: number;
   updated_at: string;
   fork: boolean;
+  private: boolean;
   owner: {
     login: string;
   };
@@ -151,7 +152,9 @@ export const fetchGithubProjects = cache(async (): Promise<Project[]> => {
   const repositories = (await response.json()) as GitHubRepository[];
 
   return repositories
-    .filter((repo) => !repo.fork && !EXCLUDED_REPOS.has(repo.name))
+    .filter(
+      (repo) => !repo.private && !repo.fork && !EXCLUDED_REPOS.has(repo.name)
+    )
     .map(mapRepositoryToProject)
     .sort((a, b) => {
       if (a.featured && !b.featured) return -1;
