@@ -135,8 +135,13 @@ export const getGithubAvatarUrl = (
 };
 
 export const fetchGithubProjects = cache(async (): Promise<Project[]> => {
+  const searchParams = new URLSearchParams({
+    sort: "updated",
+    per_page: "100",
+    type: "public",
+  });
   const response = await fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`,
+    `https://api.github.com/users/${username}/repos?${searchParams.toString()}`,
     {
       headers,
       next: { revalidate: 60 * 60 },
