@@ -12,6 +12,7 @@ interface GitHubRepository {
   stargazers_count: number;
   updated_at: string;
   fork: boolean;
+  private: boolean;
   owner: {
     login: string;
   };
@@ -134,8 +135,13 @@ export const getGithubAvatarUrl = (
 };
 
 export const fetchGithubProjects = cache(async (): Promise<Project[]> => {
+  const searchParams = new URLSearchParams({
+    sort: "updated",
+    per_page: "100",
+    type: "public",
+  });
   const response = await fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`,
+    `https://api.github.com/users/${username}/repos?${searchParams.toString()}`,
     {
       headers,
       next: { revalidate: 60 * 60 },
@@ -151,7 +157,9 @@ export const fetchGithubProjects = cache(async (): Promise<Project[]> => {
   const repositories = (await response.json()) as GitHubRepository[];
 
   return repositories
-    .filter((repo) => !repo.fork && !EXCLUDED_REPOS.has(repo.name))
+    .filter(
+      (repo) => !repo.private && !repo.fork && !EXCLUDED_REPOS.has(repo.name)
+    )
     .map(mapRepositoryToProject)
     .sort((a, b) => {
       if (a.featured && !b.featured) return -1;
